@@ -4,18 +4,25 @@ import com.example.phase2_ressources_groupe9.horaire.Horaire;
 import com.example.phase2_ressources_groupe9.personne.Personne;
 import com.example.phase2_ressources_groupe9.salle.Salle;
 import jakarta.persistence.*;
-import jakarta.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String personneId;
-    private String salleId;
-    private String horaireId;
+    @ManyToOne
+    @JoinColumn(name = "personne_id")
+    private Personne personne;
+
+    @ManyToOne
+    @JoinColumn(name = "salle_id")
+    private Salle salle;
+
+    @ManyToOne
+    @JoinColumn(name = "horaire_id")
+    private Horaire horaire;
 
     public Long getId() {
         return id;
@@ -25,27 +32,28 @@ public class Reservation {
         this.id = id;
     }
 
-    public String getPersonneId() {
-        return personneId;
+    public Personne getPersonne() {
+        return personne;
     }
 
-    public void setPersonneId(String personneId) {
-        this.personneId = personneId;
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
     }
 
-    public String getSalleId() {
-        return salleId;
+    public Salle getSalle() {
+        return salle;
     }
 
-    public void setSalleId(String salleId) {
-        this.salleId = salleId;
+    public void setSalle(Salle salle) {
+        this.salle = salle;
     }
 
-    public String getHoraireId() {
-        return horaireId;
+    public Horaire getHoraire() {
+        return horaire;
     }
 
-    public void setHoraireId(String horaireId) {
-        this.horaireId = horaireId;
+    public void setHoraire(Horaire horaire) {
+        this.horaire = horaire;
     }
+
 }

@@ -29,4 +29,15 @@ public class HoraireController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> supprimerHoraire(@PathVariable Long id) {
+        return horaireRepository.findById(id)
+                .map(horaire -> {
+                    horaireRepository.delete(horaire);
+                    return ResponseEntity.ok().build();
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
